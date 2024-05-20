@@ -1,1 +1,9 @@
 
+WITH CTE AS ( SELECT *,
+            CASE WHEN CLICKED=0 THEN 1 
+             WHEN CLICKED=1 AND search_results_position >3 THEN 2 
+             WHEN CLICKED=1 AND search_results_position <=3 THEN 3 
+             END AS RATING
+            FROM fb_search_events )
+SELECT SEARCH_ID, MAX(RATING) FROM CTE
+GROUP BY SEARCH_ID;
