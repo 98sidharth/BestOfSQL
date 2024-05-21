@@ -1,0 +1,5 @@
+#https://platform.stratascratch.com/coding/10172-best-selling-item/official-solution?code_type=1
+with cte as (select extract(month from invoicedate) as month,description, sum(unitprice*quantity) as total_amount_paid, dense_rank()over(partition by extract(month from invoicedate) order by sum(unitprice * quantity) desc) as rnk
+from online_retail
+GROUP BY 1,2)
+select month, description, total_amount_paid from cte where rnk=1
