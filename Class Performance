@@ -1,0 +1,6 @@
+#https://platform.stratascratch.com/coding/10310-class-performance?code_type=1
+with cte as (
+            select *, assignment1 + assignment2 + assignment3 as total
+            from box_scores )
+select max(total)-min(total) as diff
+from cte;
